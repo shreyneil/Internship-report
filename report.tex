@@ -1,0 +1,368 @@
+	\documentclass[12pt]{report}
+
+\usepackage{amsmath}
+\usepackage[colorlinks,linkcolor=black]{hyperref}
+\usepackage[margin=2cm]{geometry}
+\usepackage{ragged2e}
+
+\newcommand*{\Signature}[1]{
+	\vspace{3cm}
+    \par\noindent\makebox[5cm]{\hrulefill}
+    \par\noindent\makebox[5cm][l]{#1}
+}
+
+\title{FOSSEE Image Processing and Computer Vision Toolbox\\Summer Internship 2017, IIT Bombay}
+\author{Shreyash Sharma}
+\date{May-July 2017}
+
+\begin{document}
+
+% title page
+\maketitle
+
+\pagenumbering{roman}
+
+%acknowledgements
+\chapter*{Acknowledgements}
+I would like to extend my gratitude to thank Ms. Shamika Mohanan for giving me the opportunity to work as an intern under FOSSEE at IIT Bombay and also for guiding me as a mentor throughout my project. I would also like to thank Prof. Kannan Moudgalya for his valuable inputs and continuous support. I would also like to thank my teammates and colleagues for their continuos contribuiton and support.
+
+\Signature{\normalsize Prof. Madhu Belur
+          }
+\\	
+CO-PI,FOSSEE \\
+Dept. of Electrical Engineering,IIT Bombay \\
+
+\Signature{\normalsize Ms. Shamika Mohanan
+          }
+
+%authors
+\chapter*{Project Team}
+
+\begin{itemize}
+	\item Shreyash Sharma\\Manipal Institute of Technology, Manipal\\Department of Computer Science & Engineering\\
+	\item Gursimar Singh\\PDPM IIITDM, Jabalpur\\Department of Electronics & Communication Engineering\\ 
+	\item Nihar Rao\\Manipal Institute of Technology, Manipal\\Department of Computer Science & Engineering\\
+	\item Manoj Sree Harsha\\National Institute of Technology, Nagpur\\Department of Computer Science & Engineering\\
+	\item M Avinash Reddy\\IIT Hyderabad\\Department of Electrical Engineering\\
+	\item Shubham Lohakare\\NITK Surathkal\\Department of Computer Engineering\\
+	\item Ashish Manatosh Barik\\NIT Rourkela\\Department of Computer Science Engineering\\
+	\item Rohan Gurve\\G H Patel College of Engineering and Technology, Anand\\Department of Computer Engineering\\
+	\item Ebey Abraham\\Rajiv Gandhi Institute of Technology, Kottayam, Kerala\\Depatment of Computer Science\\
+	\item Siddhant Narang\\Manipal Institute of Technology, Manipal\\Department of Computer Science & Engineering\\
+\end{itemize}
+
+%table of contents
+\tableofcontents
+
+\pagenumbering{arabic}
+
+%intro
+\chapter{Introduction}
+
+\section{Aim}
+\justify
+The aim of this project was to add new functionalities to the Scilab Image Processing and Computer Vision
+Toolbox by creating OpenCV and PCL wrapper functions in Scilab and also to port the pre-existing codebase
+from OpenCV 2.4 to 3.0.0.
+
+\justify
+The project invovled working with two libararies OpenCV and Point Cloud. OpenCV is an open source image processing & computer 
+vision library while Point Cloud is an open source library for manipulating 2D/3D images and point cloud processing.
+
+\justify
+The functions in this toolbox can be classified into two categories:
+\begin{itemize}
+	\item Image Processing
+	\item Computer Vision
+\end{itemize}
+
+\subsection{Image Processing}
+This category contains all the functions that deal with the manipulation of images which includes all the image
+transformation, enhancement and input/output functions.
+
+\subsection{Computer Vision}
+This category contains all the functions that deal with detection and recognition of images. Functions in
+this category can also be used for objct tracking, camera calibration(Normal and Fisheye) and 3-D point cloud processing.
+
+\section{Scilab}
+Scilab is an open source toolbox which can be used to solve a variety of problems.
+The motivation behind working on the Scilab toolbox is  the fact that its proprietary counter part Matlab incurs
+a very high cost of purchasal.
+
+In this project we have used Scilab as a platform to serve the user with the capability to solve
+problems related to image processing and computer vision.
+
+\subsection{Scilab API}
+Scilab\cite{scilab} like any other toolbox in the market has APIs (Application Program Interface) written for C,C++ and other languages.
+In this project we have used APIs in C++ to create the wrapper functions for OpenCV and Point Cloud Library(PCL). 
+
+\section{OpenCV}
+\justify
+OpenCV\cite{opencv} is an open source library for image processing and computer vision which was written
+for langueages like C/C++, Python and Java.
+\justify
+In this project we have used its functions in C++ as they could be easily integrated with the Scilab APIs to 
+create the wrapper functions.
+\justify
+OpenCV is highly customizable as further in this report you will see we modified the OpenCV source code to serve 
+our purpose.
+
+\section{Point Cloud Library (PCL)}
+The PCL\cite{pcl} library like OpenCV is also an open source library which is specifically used for manipulating 2D/3D image
+and point cloud processing.
+\justify
+It also has its APIs for C++ which we have used to create the wrapper functions for a corresponding PCL 
+functions.
+
+
+\chapter{Interface Design}
+
+\section{Interface Structure}
+The following things constitute the important parts of the interface.
+\begin{enumerate}
+	\item builder.sce
+	\item loader.sce
+	\item C++ files
+    \item Scilab Macro Files(.sci files).	
+\end{enumerate}
+
+\subsection{builder.sce}
+This file builds the required functions and prepares them so that they can be loaded into the Scilab environment. It contains the following:
+\begin{itemize}
+	\item The list of C++ files that have to be compiled
+	\item The functions to be loaded in the Scilab environment.
+	\item The linker flags
+	\item The macros to be loaded
+	\item Code to build the documentation, help files and demos
+\end{itemize}
+
+\subsection{loader.sce}
+This file is used for loading the files which have been built by executing the builder file.
+
+\subsection{C++ Files}
+These are the files used for building the wrapper functions executable in scilab.It functions 
+as the backend for the scilab functions.The main problem solving occurs within these files itself. 
+
+\subsection{Scilab Macro Files}
+\justify
+Instead of interfacing with the Scilab command line directly, the C++ functions are called by Scilab functions defined in the macro files. The macro files help in building of the scilab 
+functions by providing the basic skeleton and calling the c++ function within.
+
+\justify
+Macros serve the following functions:
+\begin{itemize}
+  \item Validating the user input data  and provding error checks for set of inputs.
+  \item Proper formatting of the data for different functions in scilab.
+  \item Support variable input and output arguments with ease
+\end{itemize}
+
+
+\chapter{Implementation of OpenCV functions}
+
+\section{Machine Lerning}
+
+ This module\cite{ml} contains submodules for training and classfication of the data presented by the user.The functions present, train the data on imagesets and store them in an 
+ .xml or .yml files. The file is then used for classification of data based on whether the training type is supervised or unsupervised.Some work was previously done on 
+ this module, we built upon that work to add new functionalities and make it more user friendly. 
+
+\begin{itemize}
+	\item Artificial Neural Networks and Multi layer\cite{ANN} perceptron(ANNMLP)
+	\item Decision Trees(dtrees)\cite{dt}
+	\item Boost(Boost)\cite{bos}
+\end{itemize}
+
+\subsection{Artificial Neural Networks and Multi layer perceptron}
+The Multi Layer Perceptron (MLP) algorithm is a powerful form of an Artificial Neural Network that is commonly used for regression (and can also be used for classification ).
+The Multi Layer Perceptron algorithm follows supervised learning algorithm which can be used for both classification as well as regression for various types of N-dimensional signals	.
+
+
+\subsubsection{trainANNMLPClassifier}
+MLP follows supervised learning.This function trains a ANN classifier which can be used to predict classes of images given to it as
+input using the predictANNMLP() function.
+
+\justify
+The function can exploit two types of algorithims which include back propagation and  resilient backpropagation.
+The algorithm stops when either 100 iterations are completed or the error rate is < $10$$^$$7$.
+
+
+\subsubsection{predictANN}
+The predict fucntion takes in input from the output of the train function and a test image for predicting
+the label of the input image. 
+
+\subsection{Decision Trees}
+ Decision trees ,as predictive models, are used for making observations about items which are represented as branches of the tree as well as for concluding about the item's target value which  are represented by leaves. The dtree models having target variables in the form of discrete values are termed classification trees, in such kind of tree structures, leaves are represented by class labels while branches are used to represent conjunctions of features. 
+
+
+\subsubsection{traindtreeClassifier}
+Dtree follows supervised learning.This function trains a Dtree classifier which can be used to predict classes of images given to it as
+input using the predictdtree() function.
+
+\justify
+The algorithm stops when either 100 iterations are completed or the error rate is < $10$$^$$7$.
+
+
+\subsubsection{predictdtree}
+The predict fucntion takes in input from the output of the train function and a test image for predicting
+the label of the input image.
+
+\subsection{BoostClassifier}
+
+Boosting in general is an ensemble method that creates a strong classifier from a given number of weak classifiers.
+This is done by building a model from the training data, then creating a second model that attempts to correct the errors from the first model. 
+
+
+\subsubsection{trainBoostClassifier}
+Boost follows supervised learning.This function trains a Boost classifier which can be used to predict classes of images given to it as
+input using the predictBoost() function.
+
+\justify
+The algorithm stops when either 100 iterations are completed or the error rate is < $10$$^$$7$.
+
+
+\subsubsection{predictBoost}
+The predict fucntion takes in input from the output of the train function and a test image for predicting
+the label of the input image.
+
+\section{Object Detection}
+ This module\cite{od} comes under the subcategory of Computer Vision of our toolbox.It lists all the functions that can be used to detect objects.
+
+ \begin{itemize}
+	\item Histogram of Oriented Gradients\cite{hog}(HOG)
+	\item Local Binary Pattern\cite{lbp}(LBP)
+\end{itemize}
+
+ \subsection{extractHOGFeatures}
+  This function is used to extract features from an image from histogram of gradients and store the features in the form of a matrix and return this matrix to the
+  user.This helps the user in using the output feature matrix further in their call sequence.
+ \\
+ \subsection{extractLBPFeatures}
+  This function is used to extract features from an image by comparing pixel values between the central and neighbouring pixels,further , it stores the features in 
+  the form of a matrix and returns this matrix to the user.This helps the user in using the output feature matrix further in their call sequence.
+
+ \justify
+ These functions were implemented beforehand.The extractHOGFeatures had to be changed syntactically to make it running on the new stable version of OpenCV,
+ while extractLBPFeatures involved changing it's LBP histogram calculation function. 
+
+  \section{2D Features Framework}
+  This module\cite{ff} comes under the subcategory of Computer Vision of our toolbox.It contains all the functions that are used to detect,extract,match nad draw common features of 1 or more images.
+\begin{itemize}
+	\item Agast Features(AGAST)\cite{agast}
+	\item Accelerated-Kaze Features(AKAZE)\cite{akaz}
+ \end{itemize}
+
+\\
+  \subsection{detectAGASTeatures}
+  This function is used to detect corner Features in an input image.It uses AGAST algorithm to detect the features.
+  The function is part of the calling sequnence which includes feature detection and drawing of keypoints.
+
+  \subsection{detectAKAZEFeatures}
+  This function is used to detect and Compute Features in an input image.This function uses accelerated-KAZE algorithm to detect and compute the features.
+  The function is part of the calling sequnence which includes feature detection, extraction, matching of features and  subsequenlty drawing them.
+ 
+ \\
+ 
+ \section{Camera Calibration}
+ This module\cite{cc} is a part of Computer Vision of our toolbox.It contains all the functions that are required for camera calibration and 3D reconstruction.
+
+ \subsection{Calibrate}
+ This function\cite{clb} is used for undistortion of an image using camera calibration. The Camera involved belongs to fisheye/pinhole model.The intrinsic and 
+ extrinsic parameters of the camera  involved are computed.
+
+ \\
+ \justify 
+ The Following functions were already implemented beforehand, They were required to be ported from openCV 2.4 to 3.0.0. This also involved some minor bug fixes.
+ \\
+ \begin{itemize}
+	\item distortPoints
+	\item undistortImage
+ \end{itemize}
+
+ \section{Other Functions}
+ The Following functions have been implemented were already done beforehand,but required some bug fixes and logical corrections.
+ \\
+ \subsection{imhistmatch}
+ The logic had to be modified for normalizing the hostograms of the input images
+ \\
+ \subsection{epipolrlines}
+ The logic had to be modified completely for making the function fit in the already present calling sequence.
+ \\
+ \subsection{isEpipoleinImage}
+ The logic had to modified to make the function accept stereo images for detection of epipolelines.
+ \\
+ \\
+ \justify
+ These functions had to be ported to the current stable OpenCV version.
+
+ \begin{itemize}
+	\item ellipse2poly
+	\item geometricshearer
+	\item imfuse
+	\item imgaussfilt3
+	\item imguidedfilter
+	\item imhmax
+	\item imsharpen
+	\item lab2uint16
+	\item lab2xyz
+	\item puttext
+	\item rgb2ntsc
+	\item sobel
+	\item threshold
+	\item projectpoints
+	\item estimatenewcameramatrixfromstereorectify
+	\item impixel
+	\item mean1
+	\item multithresh
+	\item dctmtx
+ \end{itemize}
+ 
+ \end{itemize}
+
+ \chapter{Implementation of Point Cloud Library Functions}
+   
+ \justify
+ This module involves two functions which were implemented using point cloud library for scilab.
+ 
+ \\
+  
+ \begin{itemize}
+	\item pcread
+   	\item PointCloud
+ \end{itemize}
+  
+ \subsection{pcread}
+
+ \justify
+  This function is used to read a .ply or a .pcd file and return the parameters calculated in the form of a scalar or matrix.
+  \\
+
+  \subsection{PointCloud}
+  This function is used to convert the input parameters obtained from pcread to a structure.
+
+  \\
+
+ \chapter{Conclusion and Future Work}
+
+ \justify
+  The work throughout the period was mainly focused on the use of the OpenCV library to develop the image processing toolbox for Scilab.
+  Some contribution was also made using the of point cloud library,But there is a lot of scope for working on pcl library for the future.
+
+
+\begin{thebibliography}{20}
+\bibitem{scilab} \hypertarget{scilab}{https://help.scilab.org/docs/6.0.0/en\_US/section\_204636e951f595409bc6782bb8e1d2d9.html}
+\bibitem{opencv} \hypertarget{opencv}{http://docs.opencv.org/3.0.0/}
+\bibitem{pcl} \hypertarget{pcl}{http://pointclouds.org/}
+\bibitem{ml} \hypertarget{ml}{http://docs.opencv.org/3.0.0/dd/ded/group\_\_ml.html}
+\bibitem{ff} \hypertarget{ff}{http://docs.opencv.org/3.0.0/da/d9b/group\_\_features2d.html}
+\bibitem{od} \hypertarget{od}{http://docs.opencv.org/3.0.0/d5/d54/group\_\_objdetect.html}
+\bibitem{cc} \hypertarget{cc}{http://docs.opencv.org/3.0.0/d9/d0c/group\_\_calib3d.html}
+\bibitem{ANN} \hypertarget{ANN}{http://docs.opencv.org/trunk/d0/dce/classcv\_1\_1ml\_1\_1ANN\_MLP.html}
+\bibitem{dt} \hypertarget{dt}{http://docs.opencv.org/trunk/d8/d89/classcv\_1\_1\_ml\_1\_1DTrees.html}
+\bibitem{bos} \hypertarget{bos}{http://docs.opencv.org/3.1.0/d6/d7a/classcv\_1\_1ml\_1\_1Boost.html}
+\bibitem{agast} \hypertarget{agast}{http://docs.opencv.org/trunk/d7/d19/classcv\_1\_1AgastFeatureDetector.html}
+\bibitem{akaz} \hypertarget{akaz}{http://docs.opencv.org/3.0-beta/doc/tutorials/features2d/akaze\_matching/akaze\_matching.html}
+\bibitem{hog} \hypertarget{hog}{hhttp://www.learnopencv.com/histogram-of-oriented-gradients/}
+\bibitem{lbp} \hypertarget{lbp}{http://www.pyimagesearch.com/2015/12/07/local-binary-patterns-with-python-opencv/}
+\bibitem{clb} \hypertarget{clb}{http://docs.opencv.org/trunk/db/d58/group\_calib3d\_fisheye.html}
+\end{thebibliography}
+
+ \end{document}

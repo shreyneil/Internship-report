@@ -1,0 +1,35 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Aim}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{Image Processing}{section.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.2}{Computer Vision}{section.1.1}% 4
+\BOOKMARK [1][-]{section.1.2}{Scilab}{chapter.1}% 5
+\BOOKMARK [2][-]{subsection.1.2.1}{Scilab API}{section.1.2}% 6
+\BOOKMARK [1][-]{section.1.3}{OpenCV}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.4}{Point Cloud Library \(PCL\)}{chapter.1}% 8
+\BOOKMARK [0][-]{chapter.2}{Interface Design}{}% 9
+\BOOKMARK [1][-]{section.2.1}{Interface Structure}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.1.1}{builder.sce}{section.2.1}% 11
+\BOOKMARK [2][-]{subsection.2.1.2}{loader.sce}{section.2.1}% 12
+\BOOKMARK [2][-]{subsection.2.1.3}{C++ Files}{section.2.1}% 13
+\BOOKMARK [2][-]{subsection.2.1.4}{Scilab Macro Files}{section.2.1}% 14
+\BOOKMARK [0][-]{chapter.3}{Implementation of OpenCV functions}{}% 15
+\BOOKMARK [1][-]{section.3.1}{Machine Lerning}{chapter.3}% 16
+\BOOKMARK [2][-]{subsection.3.1.1}{Artificial Neural Networks and Multi layer perceptron}{section.3.1}% 17
+\BOOKMARK [2][-]{subsection.3.1.2}{Decision Trees}{section.3.1}% 18
+\BOOKMARK [2][-]{subsection.3.1.3}{BoostClassifier}{section.3.1}% 19
+\BOOKMARK [1][-]{section.3.2}{Object Detection}{chapter.3}% 20
+\BOOKMARK [2][-]{subsection.3.2.1}{extractHOGFeatures}{section.3.2}% 21
+\BOOKMARK [2][-]{subsection.3.2.2}{extractLBPFeatures}{section.3.2}% 22
+\BOOKMARK [1][-]{section.3.3}{2D Features Framework}{chapter.3}% 23
+\BOOKMARK [2][-]{subsection.3.3.1}{detectAGASTeatures}{section.3.3}% 24
+\BOOKMARK [2][-]{subsection.3.3.2}{detectAKAZEFeatures}{section.3.3}% 25
+\BOOKMARK [1][-]{section.3.4}{Camera Calibration}{chapter.3}% 26
+\BOOKMARK [2][-]{subsection.3.4.1}{Calibrate}{section.3.4}% 27
+\BOOKMARK [1][-]{section.3.5}{Other Functions}{chapter.3}% 28
+\BOOKMARK [2][-]{subsection.3.5.1}{imhistmatch}{section.3.5}% 29
+\BOOKMARK [2][-]{subsection.3.5.2}{epipolrlines}{section.3.5}% 30
+\BOOKMARK [2][-]{subsection.3.5.3}{isEpipoleinImage}{section.3.5}% 31
+\BOOKMARK [0][-]{chapter.4}{Implementation of Point Cloud Library Functions}{}% 32
+\BOOKMARK [1][-]{subsection.4.0.1}{pcread}{chapter.4}% 33
+\BOOKMARK [2][-]{subsection.4.0.2}{PointCloud}{subsection.4.0.1}% 34
+\BOOKMARK [0][-]{chapter.5}{Conclusion and Future Work}{}% 35
